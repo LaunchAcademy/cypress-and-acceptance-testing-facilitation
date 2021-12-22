@@ -7,11 +7,12 @@ import starterRoadRaces from "../../fixtures/starterRoadRaces.json"
 const roadRacesFilePath = "roadRaces.json"
 
 context("Road Races New", () => {
-  beforeEach(() => {
-    cy.visit("/road-races/new")
-  })
 
   it("adds a road race to the list upon submitting the form", () => {
+
+    cy.writeFile(roadRacesFilePath, JSON.stringify(starterRoadRaces))
+    cy.visit("/road-races/new")
+    
     cy.get("#name")
       .type(newRoadRace.name)
       .should("have.value", newRoadRace.name)
@@ -34,9 +35,5 @@ context("Road Races New", () => {
       .find("li")
       .last()
       .should("have.text", `${newRoadRace.name} - ${newRoadRace.miles} Miles`)
-  })
-
-  afterEach(() => {
-    cy.writeFile(roadRacesFilePath, JSON.stringify(starterRoadRaces))
   })
 })

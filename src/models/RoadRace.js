@@ -26,6 +26,16 @@ class RoadRace {
     return maxRace.id + 1
   }
 
+  static findById(id){
+    const roadRaceObjects = this.findAll()
+    
+    const foundRace = roadRaceObjects.find((race) => {
+      return race.id == id  
+    })
+
+    return foundRace
+  }
+
   save() {
     this.id = this.constructor.getNextRaceId()
     const roadRaces = this.constructor.findAll()

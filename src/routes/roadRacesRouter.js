@@ -19,4 +19,11 @@ roadRacesRouter.post("/", (req, res) => {
   res.redirect("/road-races")
 })
 
+roadRacesRouter.get("/:id", (req, res) => {
+  const raceId = req.params.id
+  const roadRaceObject = RoadRace.findById(raceId)
+
+  res.render("roadRaces/show", { race: roadRaceObject })
+})
+
 export default roadRacesRouter
